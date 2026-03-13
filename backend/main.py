@@ -15,7 +15,8 @@ app = FastAPI()
 api_keyy = os.getenv('GOOGLE_API_KEY')
 client = genai.Client(api_key = api_keyy)
 origins = [
-    "*",
+    "https://art-prompt-enhancer.vercel.app",
+    "http://127.0.0.1:8000"
 ]
 
 app.add_middleware(
