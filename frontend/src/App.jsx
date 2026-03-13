@@ -6,6 +6,7 @@ function App() {
   // const [count, setCount] = useState(0)
   const [prompt, setPrompt] = useState("")
   const [model, setModel] = useState("SD 1.5")
+  const [im_model, setImModel] = useState("Midjourney")
   const [result, setResult] = useState(null)
   const [loading, setLoading] = useState(false)
   const [copied, setCopied] = useState(false)
@@ -63,7 +64,7 @@ function App() {
   try {
     const formData = new FormData();
     formData.append('file', selectedFile)
-    formData.append('model', model)
+    formData.append('model', im_model)
 
     const response = await fetch(`${import.meta.env.VITE_API_URL}/upload`, {
       method: 'POST',
@@ -132,8 +133,8 @@ function App() {
       </form>
 
       <select
-        value={model}
-        onChange={(e) => setModel(e.target.value)}
+        value={im_model}
+        onChange={(e) => setImModel(e.target.value)}
       >
         <option>SD 1.5</option>
         <option>SDXL</option>
