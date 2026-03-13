@@ -111,7 +111,7 @@ function App() {
         <option> Midjourney</option>
         <option>Flux</option>
       </select>
-      <button onClick={handleSubmit}>Submit</button>
+      <button onClick={handleSubmit} disabled={!prompt.trim()}>Submit</button>
 
       {loading && <p>Enhancing your prompt...</p>}
       {result && (
@@ -142,7 +142,7 @@ function App() {
         <option> Midjourney</option>
         <option>Flux</option>
       </select>
-      <button onClick={handleImageSubmit}>Submit</button>
+      <button onClick={handleImageSubmit} disbled={!selectedFile}>Submit</button>
 
       {imageLoading && <p>Diffusing Prompt for your Image...</p>}
       {imageResult && (
