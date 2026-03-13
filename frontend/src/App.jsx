@@ -16,7 +16,7 @@ function App() {
   const handleSubmit = async ()=> {
     setLoading(true)
     try {
-      const response = await fetch('http://127.0.0.1:8000/enhance', {
+      const response = await fetch(`${VITE_API_URL}/enhance`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify({ prompt: prompt, model: model })
@@ -48,6 +48,14 @@ function App() {
 
 
   const handleImageSubmit = async () => {
+    if (!selectedFile) {
+      alert('Please select an image first');
+      return;
+    }
+    if (selectedFile.size > 10 * 1024 * 1024) {
+      alert('Image must be under 10MB');
+      return;
+    }
     setImageLoading(true)
     
 
@@ -57,7 +65,7 @@ function App() {
     formData.append('file', selectedFile)
     formData.append('model', model)
 
-    const response = await fetch('http://127.0.0.1:8000/upload', {
+    const response = await fetch(`${VITE_API_URL}/upload`, {
       method: 'POST',
       body: formData
     
