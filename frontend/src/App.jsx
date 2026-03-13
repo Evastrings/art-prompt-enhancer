@@ -16,7 +16,7 @@ function App() {
   const handleSubmit = async ()=> {
     setLoading(true)
     try {
-      const response = await fetch(`${VITE_API_URL}/enhance`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/enhance`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify({ prompt: prompt, model: model })
@@ -65,7 +65,7 @@ function App() {
     formData.append('file', selectedFile)
     formData.append('model', model)
 
-    const response = await fetch(`${VITE_API_URL}/upload`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/upload`, {
       method: 'POST',
       body: formData
     
