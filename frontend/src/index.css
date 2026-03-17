@@ -135,6 +135,7 @@ button:disabled {
   line-height: 1.7;
   cursor: pointer;
   transition: color 0.2s;
+  text-align: left;
 }
 
 .result-text:hover {
