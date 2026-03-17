@@ -22,6 +22,12 @@ function App() {
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify({ prompt: prompt, model: model })
       })
+    // try {
+    // const response = await fetch('http://127.0.0.1:8000/enhance', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json'},
+    //   body: JSON.stringify({ prompt: prompt, model: model })
+    // })
 
       const data = await response.json();
       console.log('Prompts recieved:', data);
@@ -72,6 +78,12 @@ function App() {
     
       
     });
+    // const response = await fetch('http://127.0.0.1:8000/upload', {
+    // method: 'POST',
+    // body: formData
+  
+    
+    // });
    
 
     const data = await response.json();
@@ -91,6 +103,7 @@ function App() {
  
   return (
     <>
+    <div className="card">
       <h1> Hey there, Artist</h1>
       <form>
         <label> Enter rough prompt:
@@ -112,22 +125,29 @@ function App() {
         <option>Flux</option>
       </select>
       <button onClick={handleSubmit} disabled={!prompt.trim()}>Submit</button>
+      </div>
 
       {loading && <p>Enhancing your prompt...</p>}
       {result && (
-        <div>
-          <p onClick={() => handleCopy(result.positive_prompt, 'positive')}>{result.positive_prompt} {copied === 'positive' && <span> <br />Copied </span> } </p>
-          <p onClick={() => handleCopy(result.negative_prompt, 'negative')}> {result.negative_prompt} {copied === 'negative' && <span> <br />Copied </span> } </p>
+        <div className="result-card">
+          <p className="result-label"> Positive Prompt </p>
+          <p className="result-text" onClick={() => handleCopy(result.positive_prompt, 'positive')}>{result.positive_prompt} {copied === 'positive' && <span className="copied-tag"> <br />Copied </span> } </p>
+          <p className="result-label" style={{marginTop: '1.5rem'}}> Negative Prompt</p>
+          <p className="result-text" onClick={() => handleCopy(result.negative_prompt, 'negative')}> {result.negative_prompt} {copied === 'negative' && <span className="copied-tag"> <br />Copied </span> } </p>
         </div>
+        
       )}
 
         {/*NEW PAGE FOR UPLOADING IMAGE*/}
-        <h1> Hey there, Image Artist</h1>
+        <div className="card">
+        <h1> Hey, Image Artist</h1>
       <form>
-        <label> Enter Image to extract prompt:
+        <label className="file-upload-label">
+          {selectedFile ? selectedFile.name : 'Choose Image'}
           <input type="file"
             accept="image/*"
             onChange={(e) => setSelectedFile(e.target.files[0])}
+            style={{display: 'none'}}
            />
         </label>
       </form>
@@ -142,13 +162,16 @@ function App() {
         <option> Midjourney</option>
         <option>Flux</option>
       </select>
-      <button onClick={handleImageSubmit} disbled={!selectedFile}>Submit</button>
+      <button onClick={handleImageSubmit} disabled={!selectedFile}>Submit</button>
+      </div>
 
       {imageLoading && <p>Diffusing Prompt for your Image...</p>}
       {imageResult && (
-        <div>
-          <p onClick={() => handleCopy(imageResult.positive_prompt, 'positive')}>{imageResult.positive_prompt} {copied === 'positive' && <span> <br />Copied </span> } </p>
-          <p onClick={() => handleCopy(imageResult.negative_prompt, 'negative')}> {imageResult.negative_prompt} {copied === 'negative' && <span> <br />Copied </span> } </p>
+        <div className="result-card">
+          <p className="result-label"> Positive Prompt </p>
+          <p className="result-text" onClick={() => handleCopy(imageResult.positive_prompt, 'positive')}>{imageResult.positive_prompt} {copied === 'positive' && <span className="copied-tag"> <br />Copied </span> } </p>
+          <p className="result-label" style={{marginTop: '1.5rem'}}> Negative Prompt</p>
+          <p className="result-text" onClick={() => handleCopy(imageResult.negative_prompt, 'negative')}> {imageResult.negative_prompt} {copied === 'negative' && <span className="copied-tag"> <br />Copied </span> } </p>
         </div>
       )}
     </>
