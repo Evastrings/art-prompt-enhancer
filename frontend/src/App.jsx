@@ -103,6 +103,8 @@ function App() {
  
   return (
     <>
+    <div className="scroll-container">
+    <div className="scroll-section">
     <div className="card">
       <h1> Hey there, Artist</h1>
       <form>
@@ -126,6 +128,7 @@ function App() {
       </select>
       <button onClick={handleSubmit} disabled={!prompt.trim()}>Submit</button>
       </div>
+      
 
       {loading && <p>Enhancing your prompt...</p>}
       {result && (
@@ -137,8 +140,10 @@ function App() {
         </div>
         
       )}
+      </div>
 
         {/*NEW PAGE FOR UPLOADING IMAGE*/}
+        <div className="scroll-section">
         <div className="card">
         <h1> Hey, Image Artist</h1>
       <form>
@@ -164,6 +169,7 @@ function App() {
       </select>
       <button onClick={handleImageSubmit} disabled={!selectedFile}>Submit</button>
       </div>
+      
 
       {imageLoading && <p>Diffusing Prompt for your Image...</p>}
       {imageResult && (
@@ -174,6 +180,9 @@ function App() {
           <p className="result-text" onClick={() => handleCopy(imageResult.negative_prompt, 'negative')}> {imageResult.negative_prompt} {copied === 'negative' && <span className="copied-tag"> <br />Copied </span> } </p>
         </div>
       )}
+      </div>
+      </div>
+      <div className="scroll-hint">swipe → for image prompt</div>
     </>
   )
 }
