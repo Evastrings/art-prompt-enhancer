@@ -22,12 +22,7 @@ function App() {
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify({ prompt: prompt, model: model })
       })
-    // try {
-    // const response = await fetch('http://127.0.0.1:8000/enhance', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json'},
-    //   body: JSON.stringify({ prompt: prompt, model: model })
-    // })
+    
 
       const data = await response.json();
       console.log('Prompts recieved:', data);
@@ -78,12 +73,7 @@ function App() {
     
       
     });
-    // const response = await fetch('http://127.0.0.1:8000/upload', {
-    // method: 'POST',
-    // body: formData
-  
     
-    // });
    
 
     const data = await response.json();
@@ -115,18 +105,19 @@ function App() {
            />
         </label>
       </form>
-
-      <select
-        value={model}
-        onChange={(e) => setModel(e.target.value)}
-      >
-        <option>SD 1.5</option>
-        <option>SDXL</option>
-        <option>SD 3</option>
-        <option> Midjourney</option>
-        <option>Flux</option>
-      </select>
-      <button onClick={handleSubmit} disabled={!prompt.trim()}>Submit</button>
+      <div className="controls">
+        <select
+          value={model}
+          onChange={(e) => setModel(e.target.value)}
+        >
+          <option>SD 1.5</option>
+          <option>SDXL</option>
+          <option>SD 3</option>
+          <option> Midjourney</option>
+          <option>Flux</option>
+        </select>
+        <button onClick={handleSubmit} disabled={!prompt.trim()}>Submit</button>
+        </div>
       </div>
       
 
@@ -156,18 +147,19 @@ function App() {
            />
         </label>
       </form>
-
-      <select
-        value={im_model}
-        onChange={(e) => setImModel(e.target.value)}
-      >
-        <option>SD 1.5</option>
-        <option>SDXL</option>
-        <option>SD 3</option>
-        <option> Midjourney</option>
-        <option>Flux</option>
-      </select>
-      <button onClick={handleImageSubmit} disabled={!selectedFile}>Submit</button>
+      <div className="controls">
+        <select
+          value={im_model}
+          onChange={(e) => setImModel(e.target.value)}
+        >
+          <option>SD 1.5</option>
+          <option>SDXL</option>
+          <option>SD 3</option>
+          <option> Midjourney</option>
+          <option>Flux</option>
+        </select>
+        <button onClick={handleImageSubmit} disabled={!selectedFile}>Submit</button>
+        </div>
       </div>
       
 
